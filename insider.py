@@ -58,4 +58,26 @@ df2 = tradedetails("s",25000,"","",0,1,1,0,0,0,"")
 cleanerdataframe(df1)
 cleandataframe(df2)
 readydata = pd.concat([df1,df2])
+readydata['Pandas Trade Date'] = pd.to_datetime(readydata['Trade Date'])
+readydata['Pandas Todays Date'] = pd.to_datetime("2016-4-4")
+readydata['Days Since'] = readydata['Pandas Todays Date'] - readydata['Pandas Trade Date']
+
+def categorise(x):
+    if x < 8:
+        return "Less Than 7 Days"
+    elif x < 16:
+        return "Less Than 15 Days"
+    elif x < 31:
+        return "Less Than 30 Days"
+    elif x < 46:
+        return "Less Than 45 Days"
+    elif x < 31:
+        return "Less Than 60 Days"
+    elif x < 91:
+        return "Less Than 90 Days"
+    else:
+        return "More Than 90 Days"
+
+readydata['Day Brackets'] = readydata['Days Since'].astype('timedelta64[D]').apply(categorise)
+
 readydata.to_excel("readydata.xlsx")
