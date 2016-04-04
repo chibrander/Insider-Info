@@ -37,8 +37,17 @@ def convertnumber(x):
 def cleandataframe(df):
     df['Trade Date'] = df['Trade Date'].apply(convertdate)
     df['Filing Time'] = df['Filing Date'].apply(converttime)
-    df['Filing Day'] = df['Filing Date'].apply(convertdate)
+    df['Filing Date'] = df['Filing Date'].apply(convertdate)
     #df['Shares Traded'] = df['Shares Traded'].apply(convertnumber)
+    df['Value Traded'] = df['Value Traded'].apply(convertnumber)
+    #df['Shares Owned'] = df['Shares Owned'].apply(convertnumber)
+    return df
+
+def cleanerdataframe(df):
+    df['Trade Date'] = df['Trade Date'].apply(convertdate)
+    df['Filing Time'] = df['Filing Date'].apply(converttime)
+    df['Filing Date'] = df['Filing Date'].apply(convertdate)
+    df['Shares Traded'] = df['Shares Traded'].apply(convertnumber)
     df['Value Traded'] = df['Value Traded'].apply(convertnumber)
     #df['Shares Owned'] = df['Shares Owned'].apply(convertnumber)
     return df
@@ -46,7 +55,7 @@ def cleandataframe(df):
 df1 = tradedetails("p",25000,"","",0,1,1,0,0,0,"")
 df2 = tradedetails("s",25000,"","",0,1,1,0,0,0,"")
 
-cleandataframe(df1)
+cleanerdataframe(df1)
 cleandataframe(df2)
 readydata = pd.concat([df1,df2])
 readydata.to_excel("readydata.xlsx")
