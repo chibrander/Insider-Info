@@ -71,7 +71,7 @@ def categorise(x):
         return "Less Than 30 Days"
     elif x < 46:
         return "Less Than 45 Days"
-    elif x < 31:
+    elif x < 61:
         return "Less Than 60 Days"
     elif x < 91:
         return "Less Than 90 Days"
